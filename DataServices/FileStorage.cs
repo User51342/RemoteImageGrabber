@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+using System.Drawing;
 using System.IO;
 using RemoteImageGrabber.DataAccess;
 using RemoteImageGrabber.DataAccess.Entities;
@@ -14,6 +15,7 @@ namespace RemoteImageGrabber.DataServices
             var fileName = $"ImageGrab_{DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss")}.jpg";
             var filePathAndName = Path.Combine(filePath,fileName);
             File.WriteAllBytes(filePathAndName, image);
+            ImageRotation.Rotate(filePathAndName, RotateFlipType.Rotate90FlipNone);
             RecordFileName(fileName);
             var fileSize = (int)new FileInfo(filePathAndName).Length;
             return fileSize;
